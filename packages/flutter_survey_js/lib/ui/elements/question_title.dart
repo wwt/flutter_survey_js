@@ -2,14 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_survey_js/ui/survey_widget.dart';
-import 'package:flutter_survey_js_model/flutter_survey_js_model.dart' as s;
 import 'package:flutter_survey_js/utils.dart';
+import 'package:flutter_survey_js_model/flutter_survey_js_model.dart' as s;
 
 class QuestionTitle extends StatelessWidget {
   final s.Question q;
   final Widget? child;
+  final TextStyle? textStyle;
 
-  const QuestionTitle({Key? key, required this.q, this.child})
+  const QuestionTitle({Key? key, required this.q, this.child, this.textStyle})
       : super(key: key);
 
   @override
@@ -27,7 +28,7 @@ class QuestionTitle extends StatelessWidget {
       }
     }
 
-    titleTextStyle() => Theme.of(context).textTheme.titleLarge;
+    titleTextStyle() => textStyle ?? Theme.of(context).textTheme.titleLarge;
 
     title() {
       List<Widget> listTitle = <Widget>[];

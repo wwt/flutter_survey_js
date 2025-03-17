@@ -13,7 +13,11 @@ typedef SurveyFormControlBuilder = AbstractControl? Function(
     {List<Validator> validators, Object? value});
 
 typedef SurveyTitleWidgetBuilder = Widget Function(
-    BuildContext context, s.Elementbase element, Widget child);
+  BuildContext context,
+  s.Elementbase element,
+  Widget child,
+  TextStyle? textStyle,
+);
 
 @immutable
 class ElementConfiguration {
@@ -44,12 +48,13 @@ Widget defaultSeparatorBuilder(
   );
 }
 
-Widget defaultTitleBuilder(
-    BuildContext context, s.Elementbase element, Widget child) {
+Widget defaultTitleBuilder(BuildContext context, s.Elementbase element,
+    Widget child, TextStyle? textStyle) {
   if (element is s.Question) {
     return QuestionTitle(
       q: element,
       child: child,
+      textStyle: textStyle,
     );
   } else {
     return child;
@@ -111,11 +116,15 @@ class SurveyConfiguration extends InheritedWidget {
 
 extension QuestionTitleExtension on Widget {
   Widget wrapQuestionTitle(BuildContext context, s.Elementbase element,
-      {ElementConfiguration? configuration}) {
+      {ElementConfiguration? configuration, TextStyle? textStyle}) {
     if (configuration?.hasTitle == false) {
       return this;
     }
-    return SurveyConfiguration.of(context)!
-        .titleBuilder(context, element, this);
+    return SurveyConfiguration.of(context)!.titleBuilder(
+      context,
+      element,
+      this,
+      textStyle,
+    );
   }
 }

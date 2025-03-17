@@ -4,9 +4,9 @@ import 'package:flutter_survey_js/ui/reactive/reactive.dart';
 import 'package:flutter_survey_js/ui/reactive/reactive_color_picker.dart';
 import 'package:flutter_survey_js/ui/reactive/reactive_date_time_picker.dart';
 import 'package:flutter_survey_js/ui/survey_configuration.dart';
+import 'package:flutter_survey_js/utils.dart';
 import 'package:flutter_survey_js_model/flutter_survey_js_model.dart' as s;
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:flutter_survey_js/utils.dart';
 
 Widget textBuilder(BuildContext context, s.Elementbase element,
     {ElementConfiguration? configuration}) {
@@ -89,7 +89,11 @@ Widget textBuilder(BuildContext context, s.Elementbase element,
     );
   }
   return widget.wrapQuestionTitle(context, element,
-      configuration: configuration);
+      configuration: configuration,
+      textStyle: Theme.of(context)
+          .textTheme
+          .titleLarge
+          ?.copyWith(fontWeight: FontWeight.w400));
 }
 
 AbstractControl textControlBuilder(BuildContext context, s.Elementbase element,
